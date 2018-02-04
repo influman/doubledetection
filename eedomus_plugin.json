@@ -1,0 +1,144 @@
+{
+    "plugin_id": "doubledetect",
+    "name_fr": "Double Détection",
+    "icon": "doubledetection.png",
+    "version": "1.1",
+    "creation_date": "2017-12-14",
+    "modification_date": "2017-12-14",
+    "author": "Influman",
+    "description_fr": "Couplage de <b>deux détecteurs de mouvements dans un seul</b>",
+    "description_en": "",
+    "forum_link": "http://forum.eedomus.com/viewtopic.php?f=50&t=6301",
+    "parameters":
+        [
+            {
+                "parameter": "NAME1", 
+                "description": "Emplacement du détecteur n°1 :",
+                "xtype": "textfield",
+                "field": "allowBlank: false, maxLength:15, minLength:1, width: 240"
+            },
+            {
+                "parameter": "API1", 
+                "description": "Périphérique détecteur n°1",
+                "xtype": "combo",
+				"field": "store : getCombo('/json/list_all.php?sensor_only=1&value_type=list&has_value=0,100'), displayField: 'label', valueField: 'id', typeAhead: true, forceSelection: true, triggerAction: 'all', selectOnFocus: true, editable: false, shadow:true, mode: 'local', width: 250, listWidth: 300, allowBlank: false"
+			},
+			{
+                "parameter": "NAME2", 
+                "description": "Emplacement du détecteur n°2 :",
+                "xtype": "textfield",
+                "field": "allowBlank: false, maxLength:15, minLength:1, width: 240"
+            },
+            {
+                "parameter": "API2", 
+                "description": "Périphérique détecteur n°2",
+                "xtype": "combo",
+				"field": "store : getCombo('/json/list_all.php?sensor_only=1&value_type=list&has_value=0,100'), displayField: 'label', valueField: 'id', typeAhead: true, forceSelection: true, triggerAction: 'all', selectOnFocus: true, editable: false, shadow:true, mode: 'local', width: 250, listWidth: 300, allowBlank: false"
+			}
+        ],
+    "scripts":
+        [
+            {
+                "name": "doubledetection.php"
+            }
+        ],        
+    "devices":
+        [
+            {
+                "device_id": "captdouble",
+                "module_id": "51",
+                "type": "http",
+                "name_fr": "plugin.name - plugin.parameters.NAME1 + plugin.parameters.NAME2",
+                "icon": "doubledetection.png",
+                "parameters":
+                    {
+				        "VAR1": "plugin.parameters.API1",
+				        "VAR2": "plugin.parameters.API2",
+                        "VAR3": "",                        
+                        "value_type": "list",
+                        "ignore_errors": 3,
+                        "RAW_URL": "http://localhost/script/?exec=doubledetection.php&action=status&api1=[VAR1]&api2=[VAR2]",
+                        "RAW_XPATH": "/DOUBLEDETECTION/STATUS",
+                        "POLLING": "30"
+                    },
+				"values":
+                   [
+                        { "value": "0", "icon": "aucunmvt.png", "description": "Aucun mouvement"},
+                        { "value": "101", "icon": "mvt1.png", "description": "Mouvement plugin.parameters.NAME1"},
+						{ "value": "102", "icon": "mvt2.png", "description": "Mouvement plugin.parameters.NAME2"},
+						{ "value": "103", "icon": "doublesens1.png", "description": "Mouvement plugin.parameters.NAME1 puis plugin.parameters.NAME2"},
+						{ "value": "104", "icon": "doublesens2.png", "description": "Mouvement plugin.parameters.NAME2 puis plugin.parameters.NAME1"}
+					] 
+            },
+            {
+                "device_id": "detect1",
+                "module_id": "41",
+                "parent_id": "captdouble",
+                "type": "http",
+                "name_fr": "plugin.name - Détecteur n°1 plugin.parameters.NAME1",
+                "parameters":
+                    {
+				        "VAR1": "plugin.parameters.API1",
+				        "VAR2": "plugin.parameters.API2",
+                        "VAR3": "",  
+                        "value_type": "list",
+                        "ignore_errors": 3,
+                        "RAW_URL": "",
+                        "RAW_XPATH": "",
+                        "POLLING": "30"
+                    },
+                "values":
+                    [
+                        { "value": "0", "icon": "aucunmvt.png", "description": "Aucun Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set1&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" },
+                        { "value": "100", "icon": "mvt1.png", "description": "Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set1&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" }
+                    ]        
+            },
+			{
+                "device_id": "detect2",
+                "module_id": "41",
+                "parent_id": "captdouble",
+                "type": "http",
+                "name_fr": "plugin.name - Détecteur n°2 plugin.parameters.NAME2",
+                "parameters":
+                    {
+				        "VAR1": "plugin.parameters.API1",
+				        "VAR2": "plugin.parameters.API2",
+                        "VAR3": "",  
+                        "value_type": "list",
+                        "ignore_errors": 3,
+                        "RAW_URL": "",
+                        "RAW_XPATH": "",
+                        "POLLING": "30"
+                    },
+                "values":
+                    [
+                        { "value": "0", "icon": "aucunmvt.png", "description": "Aucun Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set2&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" },
+                        { "value": "100", "icon": "mvt2.png", "description": "Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set2&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" }
+                    ]        
+            }                              
+        ],
+		"rules": [
+      {
+        "name_fr": "plugin.name - Synchro Détecteur 1 - plugin.parameters.NAME1",
+        "criterias":
+        [
+          { "device_id": "plugin.parameters.API1", "type": "c" }
+        ],
+        "actions":
+        [
+          { "device_id": "plugin.devices.detect1", "type": "other", "action": "plugin.parameters.API1"}
+        ]
+      },
+	  {
+        "name_fr": "plugin.name - Synchro Détecteur 2 - plugin.parameters.NAME2",
+        "criterias":
+        [
+          { "device_id": "plugin.parameters.API2", "type": "c" }
+        ],
+        "actions":
+        [
+          { "device_id": "plugin.devices.detect2", "type": "other", "action": "plugin.parameters.API2"}
+        ]
+      }
+    ]
+}
