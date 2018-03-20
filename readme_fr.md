@@ -4,9 +4,9 @@ Objectif : limiter les fausses détections d'intrusion
   
 
 ### Ajout du périphérique 
-Cliquez sur "Configuration" / "Ajouter ou supprimer un prériphérique" / "Store eedomus" / "Double Détection" / "Créer"  
+Cliquez sur "Configuration" / "Ajouter ou supprimer un périphérique" / "Store eedomus" / "Double Détection" / "Créer"  
 
-![STEP1](https://img15.hostingpics.net/pics/241708step1.png)
+![STEP1](https://i.imgur.com/TkR7YAd.png)
 
 
 *Voici les différents champs à renseigner:*
@@ -18,13 +18,13 @@ Cliquez sur "Configuration" / "Ajouter ou supprimer un prériphérique" / "Store e
   
 Un capteur "Double Détection" sera alors disponible :  
 
-![STEP4](https://img15.hostingpics.net/pics/649846step4.png)
+![STEP4](https://i.imgur.com/FPgeWGD.png)
 
 ### Règles
 
 Deux règles eedomus sont créées pour synchroniser les statuts des 2 détecteurs réels avec les 2 détecteurs virtuels créés par le plug-in   
 
-![STEP2](https://img15.hostingpics.net/pics/891336step2.png) 
+![STEP2](https://i.imgur.com/gw0vhEn.png) 
 
-![STEP3](https://img15.hostingpics.net/pics/412013step3.png)
+![STEP3](https://i.imgur.com/YpfOs9b.png)
 

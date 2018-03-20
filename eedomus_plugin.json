@@ -1,37 +1,42 @@
 {
     "plugin_id": "doubledetect",
     "name_fr": "Double Détection",
+	"name_es": "Doble detección",
     "icon": "doubledetection.png",
-    "version": "1.1",
+    "version": "1.3",
     "creation_date": "2017-12-14",
-    "modification_date": "2017-12-14",
+    "modification_date": "2018-03-19",
     "author": "Influman",
     "description_fr": "Couplage de <b>deux détecteurs de mouvements dans un seul</b>",
-    "description_en": "",
+    "description_es": "Plugin para combinar dos detectores de movimiento físicos en uno virtual",
     "forum_link": "http://forum.eedomus.com/viewtopic.php?f=50&t=6301",
     "parameters":
         [
             {
                 "parameter": "NAME1", 
-                "description": "Emplacement du détecteur n°1 :",
+                "description_fr": "Emplacement du détecteur n°1 :",
+				"description_es": "Localización del detector de movimiento nº1",
                 "xtype": "textfield",
                 "field": "allowBlank: false, maxLength:15, minLength:1, width: 240"
             },
             {
                 "parameter": "API1", 
-                "description": "Périphérique détecteur n°1",
+                "description_fr": "Périphérique détecteur n°1",
+				"description_es": "Detector de movimiento nº1",
                 "xtype": "combo",
 				"field": "store : getCombo('/json/list_all.php?sensor_only=1&value_type=list&has_value=0,100'), displayField: 'label', valueField: 'id', typeAhead: true, forceSelection: true, triggerAction: 'all', selectOnFocus: true, editable: false, shadow:true, mode: 'local', width: 250, listWidth: 300, allowBlank: false"
 			},
 			{
                 "parameter": "NAME2", 
-                "description": "Emplacement du détecteur n°2 :",
+                "description_fr": "Emplacement du détecteur n°2 :",
+				"description_es": "Localización del detector de movimiento nº2",
                 "xtype": "textfield",
                 "field": "allowBlank: false, maxLength:15, minLength:1, width: 240"
             },
             {
                 "parameter": "API2", 
-                "description": "Périphérique détecteur n°2",
+                "description_fr": "Périphérique détecteur n°2",
+				"description_es": "Detector de movimiento nº2",
                 "xtype": "combo",
 				"field": "store : getCombo('/json/list_all.php?sensor_only=1&value_type=list&has_value=0,100'), displayField: 'label', valueField: 'id', typeAhead: true, forceSelection: true, triggerAction: 'all', selectOnFocus: true, editable: false, shadow:true, mode: 'local', width: 250, listWidth: 300, allowBlank: false"
 			}
@@ -49,6 +54,7 @@
                 "module_id": "51",
                 "type": "http",
                 "name_fr": "plugin.name - plugin.parameters.NAME1 + plugin.parameters.NAME2",
+				"name_es": "plugin.name - plugin.parameters.NAME1 + plugin.parameters.NAME2",
                 "icon": "doubledetection.png",
                 "parameters":
                     {
@@ -63,11 +69,11 @@
                     },
 				"values":
                    [
-                        { "value": "0", "icon": "aucunmvt.png", "description": "Aucun mouvement"},
-                        { "value": "101", "icon": "mvt1.png", "description": "Mouvement plugin.parameters.NAME1"},
-						{ "value": "102", "icon": "mvt2.png", "description": "Mouvement plugin.parameters.NAME2"},
-						{ "value": "103", "icon": "doublesens1.png", "description": "Mouvement plugin.parameters.NAME1 puis plugin.parameters.NAME2"},
-						{ "value": "104", "icon": "doublesens2.png", "description": "Mouvement plugin.parameters.NAME2 puis plugin.parameters.NAME1"}
+                        { "value": "0", "icon": "aucunmvt.png", "description_fr": "Aucun mouvement", "description_es": "Ningun movimiento"},
+                        { "value": "101", "icon": "mvt1.png", "description_fr": "Mouvement plugin.parameters.NAME1", "description_es": "Movimiento plugin.parameters.NAME1"},
+						{ "value": "102", "icon": "mvt2.png", "description_fr": "Mouvement plugin.parameters.NAME2", "description_es": "Movimiento plugin.parameters.NAME2"},
+						{ "value": "103", "icon": "doublesens1.png", "description_fr": "Mouvement plugin.parameters.NAME1 puis plugin.parameters.NAME2", "description_es": "Movimiento plugin.parameters.NAME1 y plugin.parameters.NAME2"},
+						{ "value": "104", "icon": "doublesens2.png", "description_fr": "Mouvement plugin.parameters.NAME2 puis plugin.parameters.NAME1", "description_es": "Movimiento plugin.parameters.NAME2 y plugin.parameters.NAME1"}
 					] 
             },
             {
@@ -76,6 +82,7 @@
                 "parent_id": "captdouble",
                 "type": "http",
                 "name_fr": "plugin.name - Détecteur n°1 plugin.parameters.NAME1",
+				"name_es": "plugin.name - Detector n°1 plugin.parameters.NAME1",
                 "parameters":
                     {
 				        "VAR1": "plugin.parameters.API1",
@@ -89,8 +96,8 @@
                     },
                 "values":
                     [
-                        { "value": "0", "icon": "aucunmvt.png", "description": "Aucun Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set1&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" },
-                        { "value": "100", "icon": "mvt1.png", "description": "Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set1&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" }
+                        { "value": "0", "icon": "aucunmvt.png", "description_fr": "Aucun Mouvement", "description_es": "Ningun movimiento", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set1&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" },
+                        { "value": "100", "icon": "mvt1.png", "description_fr": "Mouvement", "description_es": "Movimiento", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set1&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" }
                     ]        
             },
 			{
@@ -99,6 +106,7 @@
                 "parent_id": "captdouble",
                 "type": "http",
                 "name_fr": "plugin.name - Détecteur n°2 plugin.parameters.NAME2",
+				"name_es": "plugin.name - Detector n°2 plugin.parameters.NAME2",
                 "parameters":
                     {
 				        "VAR1": "plugin.parameters.API1",
@@ -112,14 +120,15 @@
                     },
                 "values":
                     [
-                        { "value": "0", "icon": "aucunmvt.png", "description": "Aucun Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set2&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" },
-                        { "value": "100", "icon": "mvt2.png", "description": "Mouvement", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set2&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" }
+                        { "value": "0", "icon": "aucunmvt.png", "description_fr": "Aucun Mouvement", "description_es": "Ningun movimiento", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set2&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" },
+                        { "value": "100", "icon": "mvt2.png", "description_fr": "Mouvement", "description_es": "Movimiento", "http_url": "http://localhost/script/?exec=doubledetection.php", "http_type": "GET",  "http_params": "&action=set2&api1=[VAR1]&api2=[VAR2]&value=[RAW_VALUE]" }
                     ]        
             }                              
         ],
 		"rules": [
       {
         "name_fr": "plugin.name - Synchro Détecteur 1 - plugin.parameters.NAME1",
+		"name_es": "plugin.name - Synchro Detector 1 - plugin.parameters.NAME1",
         "criterias":
         [
           { "device_id": "plugin.parameters.API1", "type": "c" }
@@ -131,6 +140,7 @@
       },
 	  {
         "name_fr": "plugin.name - Synchro Détecteur 2 - plugin.parameters.NAME2",
+		"name_es": "plugin.name - Synchro Detector 2 - plugin.parameters.NAME2",
         "criterias":
         [
           { "device_id": "plugin.parameters.API2", "type": "c" }
